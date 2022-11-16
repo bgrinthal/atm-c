@@ -12,7 +12,7 @@ public class cardHolder
     //constructor
     public cardHolder(String cardNum, int pin, string firstName, string lastName, double balance)
     {
-        this.cardNumb = cardNum;
+        this.cardNum = cardNum;
         this.pin = pin;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,27 +22,27 @@ public class cardHolder
     //getters for each variable
     public String getNum()
     {
-        return cardNum
+        return cardNum;
     }
 
     public int getPin()
     {
-        return cardPin
+        return pin;
     }
 
     public String getLastName()
     {
-        return lastName
+        return lastName;
     }
 
     public String getFirstName()
     {
-        return firstName
+        return firstName;
     }
 
     public double getBalance()
     {
-        return balance
+        return balance;
     }
 
     //setters for each variable
@@ -53,7 +53,7 @@ public class cardHolder
 
     public void setPin(int newPin)
     {
-        cardPin = newPin;
+        pin = newPin;
     }
 
     public void setFirstName(String newFirstName)
@@ -69,7 +69,7 @@ public class cardHolder
     public void setBalance(double newBalance)
     {
         balance = newBalance;
-    }    
+    }
 
     public static void Main(String[] args)
     {
@@ -86,7 +86,7 @@ public class cardHolder
         {
             Console.WriteLine("How much $$ would you like to deposit? ");
             double deposit = Double.Parse(Console.ReadLine());
-            currentUser.setBalance(deposit + currentBalance) //?????
+            currentUser.setBalance(deposit + currentUser.getBalance()); //?????
             Console.WriteLine("Thank you for you $$.  Your new balanceis: " + currentUser.getBalance());
         }
 
@@ -95,13 +95,13 @@ public class cardHolder
             Console.WriteLine("How much $$ would you like to withdraw? ");
             double withdrawal = Double.Parse(Console.ReadLine());
             //Check if user has enough money to withdraw
-            if(currentUser.getBalance() > withdrawal)
+            if (currentUser.getBalance() < withdrawal)
             {
                 Console.WriteLine("Insuficient balance");
             }
             else
             {
-                currentUser.setBalance(currentUser.getBalance() - withdraw);
+                currentUser.setBalance(currentUser.getBalance() - withdrawal);
                 Console.WriteLine("Transaction complete, thank you!");
             }
         }
@@ -125,7 +125,7 @@ public class cardHolder
         String debitCardNum = "";
         cardHolder currentUser;
 
-        while(true)
+        while (true)
         {
             try
             {
@@ -140,11 +140,11 @@ public class cardHolder
 
         Console.WriteLine("Please enter your pin: ");
         int userPin = 0;
-        while(true)
+        while (true)
         {
             try
             {
-                userPin =int.Parse(Console.ReadLine());
+                userPin = int.Parse(Console.ReadLine());
                 // Checks against our 'DB'
                 if (currentUser.getPin() == userPin) { break; }
                 else { Console.WriteLine("Incorrect pin.  Please try again"); }
@@ -161,14 +161,14 @@ public class cardHolder
             {
                 option = int.Parse(Console.ReadLine());
             }
-            catch {  }
-            if(option == 1) { deposit(currentUser); }
+            catch { }
+            if (option == 1) { deposit(currentUser); }
             else if (option == 2) { withdraw(currentUser); }
             else if (option == 3) { balance(currentUser); }
             else if (option == 4) { break; }
             else { option = 0; }
         } while (option != 4);
-        Console.WriteLine("Thank you, have a nice day!")
+        Console.WriteLine("Thank you, have a nice day!");
     }
 
 }
